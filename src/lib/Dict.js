@@ -96,6 +96,10 @@ export default class Dict {
 function loadDict(dict, dictMeta, force = false) {
   let { dictKey, data, labelField, valueField, loadPromise, showLog} = dictMeta
 
+  if (!dictKey) {
+    return Promise.reject('dictKey is required')
+  }
+
   if(loadPromise && !force) {
     return loadPromise
   }
