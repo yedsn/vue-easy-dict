@@ -9,12 +9,31 @@
 </p>
 
 
-
 ------
 
 **目录**
 
-[TOC]
+- [介绍](#介绍)
+- [安装](#安装)
+- [开始使用](#开始使用)
+- [使用示例](#使用示例)
+  - [示例一：静态数据](#示例一静态数据)
+  - [示例二：统一接口请求返回数据](#示例二统一接口请求返回数据)
+  - [示例三：独立接口请求返回数据](#示例三独立接口请求返回数据)
+- [API参考](#api参考)
+  - [配置字段](#配置字段)
+    - [showLog （是否打印日志）](#showlog-是否打印日志)
+    - [dicts （字典配置列表）](#dicts-字典配置列表)
+    - [defaultData 默认数据（可以是数组或者返回数组Promise的方法）](#defaultdata-默认数据可以是数组或者返回数组promise的方法)
+  - [$dict](#dict)
+    - [ready（字典加载完毕的Promise对象）](#ready字典加载完毕的promise对象)
+    - [loadDict（加载字典方法）](#loaddict加载字典方法)
+    - [getDictData（获取字典数据）](#getdictdata获取字典数据)
+    - [getDict（获取字典中对应值的对象）](#getdict获取字典中对应值的对象)
+    - [getDictLabel（翻译字典值）](#getdictlabel翻译字典值)
+    - [getDictRaw（获取字典中对应值的原始对象）](#getdictraw获取字典中对应值的原始对象)
+- [反馈](#反馈)
+- [开源协议](#开源协议)
 
 ## 介绍
 
@@ -162,7 +181,7 @@ export default {
   async created() {
     await this.$dict.ready // 等待全部默认加载的字典加载完成
     this.dept = this.$dict.getDictData('dept')
-    await 
+    await this.$dict.loadDict('company') // 加载指定字典
     this.company = this.$dict.getDictData('company')
   }
 }
@@ -233,7 +252,7 @@ export default {
   async created() {
     await this.$dict.ready // 等待全部默认加载的字典加载完成
     this.dept = this.$dict.getDictData('dept')
-    await 
+    await this.$dict.loadDict('company') // 加载指定字典
     this.company = this.$dict.getDictData('company')
   }
 }
@@ -289,7 +308,6 @@ export default {
   })
   ```
 
-  
 
 #### getDictData（获取字典数据）
 
