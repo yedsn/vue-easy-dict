@@ -1,7 +1,6 @@
 import Dict from './Dict'
 import { mergeOptions } from './DictOptions'
 
-export let vm
 export default function install(Vue, options) {
   mergeOptions(options)
   const dict = new Dict()
