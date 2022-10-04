@@ -2,11 +2,12 @@
 <h3 align="center">简便的Vue字典数据管理插件</h3>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/vue-easy-dict"><img src="https://img.shields.io/npm/v/@vant/weapp.svg?style=for-the-badge" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/vue-easy-dict"><img src="https://img.shields.io/npm/v/vue-easy-dict.svg?style=for-the-badge" alt="npm version" /></a>
   <a href="https://www.npmjs.com/package/vue-easy-dict"><img src="https://img.shields.io/npm/l/vue-easy-dict?style=for-the-badge" alt="License"></a>
   <a href="https://www.npmjs.com/package/vue-easy-dict"><img src="https://img.shields.io/npm/dt/vue-easy-dict.svg?style=for-the-badge&color=#4fc08d" alt="downloads" /></a>
   <a href="https://www.npmjs.com/package/vue-easy-dict"><img src="https://img.shields.io/npm/dm/vue-easy-dict.svg?style=for-the-badge&color=#4fc08d" alt="downloads" /></a>
 </p>
+
 
 
 ------
