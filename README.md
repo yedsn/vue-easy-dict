@@ -375,4 +375,4 @@ export default {
 
 ## 开源协议
 
-本项目采用[MIT](https://opensource.org/licenses/MIT)开源许可证。
+本项目采用[MIT](https://opensource.org/licenses/MIT)开源许可证。请放心使用和修改代码，但是需要保留代码中的版权信息。
