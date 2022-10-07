@@ -48,7 +48,7 @@ npm i vue-easy-dict -S
 
 ## 开始使用
 
-1. 在项目src目录下建立dict文件夹，并在该目录新建index.js配置文件（配置说明参考），内容如下
+1. 在项目src目录下建立dict文件夹，并在该目录新建index.js配置文件（配置说明参考[API参考->配置字段](#配置字段)），内容如下
 
    ```js
    import Vue from 'vue'
