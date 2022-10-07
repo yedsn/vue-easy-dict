@@ -1,6 +1,6 @@
 {
   "name": "vue-easy-dict",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Simple Vue dictionary data management plugin",
   "main": "src/index.js",
   "unpkg": "dist/vue-data-dict.js",
