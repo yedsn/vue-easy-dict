@@ -24,15 +24,15 @@
 - [API参考](#api参考)
   - [配置字段](#配置字段)
     - [showLog （是否打印日志）](#showlog-是否打印日志)
-    - [dicts （字典配置列表）](#dicts-字典配置列表)
+    - [types （字典配置列表）](#types-字典配置列表)
     - [defaultData 默认数据（可以是数组或者返回数组Promise的方法）](#defaultdata-默认数据可以是数组或者返回数组promise的方法)
   - [$dict](#dict)
     - [ready（字典加载完毕的Promise对象）](#ready字典加载完毕的promise对象)
-    - [loadDict（加载字典方法）](#loaddict加载字典方法)
-    - [getDictData（获取字典数据）](#getdictdata获取字典数据)
-    - [getDict（获取字典中对应值的对象）](#getdict获取字典中对应值的对象)
-    - [getDictLabel（翻译字典值）](#getdictlabel翻译字典值)
-    - [getDictRaw（获取字典中对应值的原始对象）](#getdictraw获取字典中对应值的原始对象)
+    - [loadType（加载字典方法）](#loadtype加载字典方法)
+    - [getType（获取字典数据）](#gettype获取字典数据)
+    - [selectDict（获取字典中对应值的对象）](#selectdict获取字典中对应值的对象)
+    - [selectDictLabel（翻译字典值）](#selectdictlabel翻译字典值)
+    - [selectDictRaw（获取字典中对应值的原始对象）](#selectdictraw获取字典中对应值的原始对象)
 - [反馈](#反馈)
 - [开源协议](#开源协议)
 
@@ -54,7 +54,7 @@ npm i vue-easy-dict -S
    import Vue from 'vue'
    import VueEasyDict from 'vue-easy-dict'
    Vue.use(VueEasyDict, {
-       dicts: [
+       types: [
            {
                dictKey: 'status',
                data: [
@@ -85,14 +85,14 @@ npm i vue-easy-dict -S
    ```vue
    <template>
      <div>
-       <div v-for="item in $dict.getDictData('status')" :key="item.value"> {{ item.label }} </div>
+       <div v-for="item in $dict.getType('status')" :key="item.value"> {{ item.label }} </div>
      </div>
    </template>
    <script>
    export default {
      mounted() {
-       console.log(`字典内容：${this.$dict.getDictData('status')}`)
-       console.log(`翻译字典值：${this.$dict.getDictLabel('status', 1)}`)
+       console.log(`字典内容：${this.$dict.getType('status')}`)
+       console.log(`翻译字典值：${this.$dict.selectDictLabel('status', 1)}`)
      }
    }
    </script>
@@ -106,7 +106,7 @@ npm i vue-easy-dict -S
 
 ```js
 {
-    dicts: [
+    types: [
         {
             dictKey: 'status',
             data: [
@@ -123,14 +123,14 @@ npm i vue-easy-dict -S
 ```vue
 <template>
   <div>
-    <div v-for="item in $dict.getDictData('status')" :key="item.value"> {{ item.label }} </div>
+    <div v-for="item in $dict.getType('status')" :key="item.value"> {{ item.label }} </div>
   </div>
 </template>
 <script>
 export default {
   mounted() {
-    console.log(`字典内容：${this.$dict.getDictData('status')}`)
-    console.log(`翻译字典值：${this.$dict.getDictLabel('status', 1)}`)
+    console.log(`字典内容：${this.$dict.getType('status')}`)
+    console.log(`翻译字典值：${this.$dict.selectDictLabel('status', 1)}`)
   }
 }
 </script>
@@ -142,7 +142,7 @@ export default {
 
 ```js
 {
-    dicts: [
+    types: [
         {
             dictKey: 'dept'
         },
@@ -181,9 +181,9 @@ export default {
   },
   async created() {
     await this.$dict.ready // 等待全部默认加载的字典加载完成
-    this.dept = this.$dict.getDictData('dept')
-    await this.$dict.loadDict('company') // 加载指定字典
-    this.company = this.$dict.getDictData('company')
+    this.dept = this.$dict.getType('dept')
+    await this.$dict.loadType('company') // 加载指定字典
+    this.company = this.$dict.getType('company')
   }
 }
 </script>
@@ -195,7 +195,7 @@ export default {
 
 ```js
 {
-    dicts: [
+    types: [
         {
             dictKey: 'dept',
             data() { 
@@ -252,9 +252,9 @@ export default {
   },
   async created() {
     await this.$dict.ready // 等待全部默认加载的字典加载完成
-    this.dept = this.$dict.getDictData('dept')
-    await this.$dict.loadDict('company') // 加载指定字典
-    this.company = this.$dict.getDictData('company')
+    this.dept = this.$dict.getType('dept')
+    await this.$dict.loadType('company') // 加载指定字典
+    this.company = this.$dict.getType('company')
   }
 }
 </script>
@@ -266,7 +266,7 @@ export default {
 
 #### showLog （是否打印日志）
 
-#### dicts （字典配置列表）
+#### types （字典配置列表）
 
 - dictKey  字典键
 - data  数据（可以是数组或者返回数组Promise的方法）
@@ -292,7 +292,7 @@ export default {
   })
   ```
 
-#### loadDict（加载字典方法）
+#### loadType（加载字典方法）
 
 - 类型：Function
 
@@ -304,13 +304,13 @@ export default {
 - 例子：
 
   ```
-  this.$dict.loadDict('dept', false).then((dictData) => {
+  this.$dict.loadType('dept', false).then((dictData) => {
       console.log("dept的字典数据为", dictData)
   })
   ```
 
 
-#### getDictData（获取字典数据）
+#### getType（获取字典数据）
 
 - 类型：Function
 
@@ -321,25 +321,10 @@ export default {
 - 例子：
 
   ```
-  let depts = this.$dict.getDictData('dept')
+  let depts = this.$dict.getType('dept')
   ```
 
-#### getDict（获取字典中对应值的对象）
-
-- 类型：Function
-
-- 参数：
-
-  - dictKey  字典键
-  - value  值
-
-- 例子：
-
-  ```
-  let dept1 = this.$dict.getDictData('dept', 1)
-  ```
-
-#### getDictLabel（翻译字典值）
+#### selectDict（获取字典中对应值的对象）
 
 - 类型：Function
 
@@ -351,10 +336,10 @@ export default {
 - 例子：
 
   ```
-  let deptName = this.$dict.getDictLabel('dept', 1)
+  let dept1 = this.$dict.getType('dept', 1)
   ```
 
-#### getDictRaw（获取字典中对应值的原始对象）
+#### selectDictLabel（翻译字典值）
 
 - 类型：Function
 
@@ -366,7 +351,22 @@ export default {
 - 例子：
 
   ```
-  let dept1Row = this.$dict.getDictRow('dept', 1)
+  let deptName = this.$dict.selectDictLabel('dept', 1)
+  ```
+
+#### selectDictRaw（获取字典中对应值的原始对象）
+
+- 类型：Function
+
+- 参数：
+
+  - dictKey  字典键
+  - value  值
+
+- 例子：
+
+  ```
+  let dept1Row = this.$dict.selectDictRow('dept', 1)
   ```
 
 ## 反馈

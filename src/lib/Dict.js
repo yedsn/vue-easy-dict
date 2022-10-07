@@ -17,11 +17,11 @@ export default class Dict {
 
   init(options) {
     if (options instanceof Array) {
-      options = { dicts: options }
+      options = { types: options }
     }
-    let dicts = options.dicts || []
+    let types = options.types || []
     const loadDictTasks = []
-    this.dictMetas = dicts.map(x => DictMeta.parse(x))
+    this.dictMetas = types.map(x => DictMeta.parse(x))
     this.dictMetas.forEach(dictMeta => {
       if (!dictMeta.immediateLoad) {
         return
@@ -39,7 +39,7 @@ export default class Dict {
    *
    * @returns {Promise}
    */
-  loadDict(dictKey, force) {
+  loadType(dictKey, force) {
     const dictMeta = this.dictMetas.find(e => e.dictKey === dictKey)
     if (dictMeta === undefined) {
       return Promise.reject(`the dict meta of ${dictKey} was not found`)
@@ -51,15 +51,15 @@ export default class Dict {
    * 获取字典数据
    * @param {String} dictKey 字典键
    */
-  getDictData(dictKey) {
+  getType(dictKey) {
     if(!this.dictDataPool[dictKey]) {
       console.warn(`you are loading an unloaded dict "${dictKey}", please do it after load`)
     }
     return this.dictDataPool[dictKey] || []
   }
 
-  getDict(dictKey, value) {
-    const dictData = this.getDictData(dictKey)
+  selectDict(dictKey, value) {
+    const dictData = this.getType(dictKey)
     const dict = dictData.find(e => e.value === value)
     return dict
   }
@@ -70,8 +70,8 @@ export default class Dict {
    * @param {*} value
    * @returns
    */
-  getDictLabel(dictKey, value) {
-    const dict = this.getDict(dictKey, value)
+  selectDictLabel(dictKey, value) {
+    const dict = this.selectDict(dictKey, value)
     return dict ? dict.label : ''
   }
 
@@ -80,8 +80,8 @@ export default class Dict {
    * @param {*} dictKey
    * @param {*} value
    */
-  getDictRaw(dictKey, value) {
-    const dict = this.getDict(dictKey, value)
+  selectDictRaw(dictKey, value) {
+    const dict = this.selectDict(dictKey, value)
     return dict ? dict.raw : {}
   }
 }
